@@ -1,0 +1,45 @@
+﻿@{
+    Layout = null;
+}
+
+<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<style>
+    fieldset {
+        background-color: #efefef;
+        border-radius:15px;
+        width: 100px;
+        margin: auto;
+        margin-top: 20vh;
+        padding: 30px;
+    }
+</style>
+<form method="post" asp-action="Login" asp-controller="Account">
+    <fieldset>
+        <div id="legend">
+            <legend class="">Giriş Yap</legend>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="username">Kullanıcı Adı</label>
+            <div class="controls">
+                <input type="text" id="username" name="UserName" placeholder="" class="form-control">
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="password">Şifre</label>
+            <div class="controls">
+                <input type="password" id="password" name="Password" placeholder="" class="form-control">
+            </div>
+        </div>
+
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn btn-success">Giriş Yap</button>
+                <p><a href="/Account/Signup">Bir hesabın yoksa kayıt ol.</a></p>
+            </div>
+        </div>
+    </fieldset>
+</form>
+

@@ -1,0 +1,58 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/HomeLayout.cshtml";
+}
+
+<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<style>
+    fieldset {
+        background-color: #efefef;
+        border-radius: 15px;
+        width: 100px;
+        margin: auto;
+        margin-top: 20vh;
+        padding: 30px;
+    }
+
+    .navbar-brand{
+        display:none
+    }
+</style>
+
+@using (Html.BeginForm("Signup", "Account", FormMethod.Post))
+{
+    <fieldset>
+        <div id="legend">
+            <legend class="">Kayıt Ol</legend>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="username">Kullanıcı Adı</label>
+            <div class="controls">
+                <input type="text" id="username" name="UserName" placeholder="" class="input-xlarge">
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="password">Şifre</label>
+            <div class="controls">
+                <input type="password" id="password" name="Password" placeholder="" class="input-xlarge">
+            </div>
+        </div>
+        
+        <div class="control-group">
+            <label class="control-label" for="repassword">Şifre Tekrar</label>
+            <div class="controls">
+                <input type="password" id="repassword" name="RePassword" placeholder="" class="input-xlarge">
+            </div>
+        </div>
+
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn btn-success">Kayıt Ol</button>
+            </div>
+        </div>
+    </fieldset>
+}

@@ -1,0 +1,141 @@
+﻿@using EntityLayer.Concrete
+@model List<Form>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/HomeLayout.cshtml";
+}
+<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+
+<script src="~/Assets/Js/Form.js"></script>
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+
+<link rel="stylesheet" href="//cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
+
+<script src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script>
+    $(function () {
+        $('table').DataTable({
+            autoWidth: false,
+            stateSave: false,
+            language: {
+                search: '_INPUT_',
+                searchPlaceholder: 'Tablo içinde arama...',
+                lengthMenu: '_MENU_',
+                zeroRecords: 'Aradığınız kayıt bulunamadı.',
+                info: "Gösterilen _START_-_END_&nbsp;,&nbsp;Toplam Kayıt Sayısı: _TOTAL_",
+                infoEmpty: 'Kayıt bulunamadı',
+                "infoFiltered": "(Toplam _MAX_ kayıt filtrelenmiştir.)",
+                paginate: { 'first': 'First', 'last': 'Last', 'next': '&rarr;', 'previous': '&larr;' }
+            },
+            responsive: {
+                details: {
+                    type: 'column',
+                    target: 0
+                }
+            },
+            columnDefs: [{
+                className: 'dtr-control',
+                orderable: false,
+                targets: 0
+            }],
+            "order": [[0, 'asc']]
+        });
+    });
+</script>
+
+<style>
+    button.btnSetFormDismiss {
+        border: 2px solid gray;
+        border-radius: 2px;
+        float: right;
+    }
+</style>
+
+<input type="button" value="Yeni Form Oluştur" class="btn btn-primary btnShowFormModal mb-5" />
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Form Adı</th>
+            <th>Açıklama</th>
+            <th>Oluşturma Tarihi</th>
+            <th>Oluşturan Kullanıcı</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.FormName</td>
+                <td>@item.Description</td>
+                <td>@(((DateTime)item.CreatedAt).ToString("dd-MMM-yyyy"))</td>
+                <td>@item.CreatedBy</td>
+                <td>
+                    <a class="btn btn-warning" href="/Form/FormDetail/@item.Id"> Formu Görüntüle</a>
+                    @*<input type="button" value="Formu Görüntüle" class="btn btn-secondary" formId="@item.Id" formName="@item.FormName" formDesc="@item.Description" firstColumn="@item.FirstColumn" secondColumn="@item.SecondColumn" thirdColumn="@item.ThirdColumn" />*@
+                    <input type="button" value="Sil" class="btn btn-danger btnFormSil" formId="@item.Id" />
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
+
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+<div class="modal fade" id="setForm" tabindex="-1" role="dialog" aria-labelledby="setFormLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="setFormLabel">Form Güncelle/Ekle</h5>
+                <button type="button" class="btnSetFormDismiss" data-dismiss="modal" aria-label="Kapat">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <tr>
+                        <td>Form Ad</td>
+                        <td><input type="text" id="txtFormName" class="form-control" /></td>
+                    </tr>
+                    <tr>
+                        <td>Form Açıklama</td>
+                        <td> <input type="text" id="txtFormDesc" class="form-control"/></td>
+                        <input type="hidden" value=@User.Identity.Name id="userName" />
+                    </tr>
+                    <tr>
+                        <td>Birinci Sütun Adı</td>
+                        <td> <input type="text" id="txtFirstColumn" class="form-control"/></td>
+                    </tr>
+                    <tr>
+                        <td>İkinci Sütun Adı</td>
+                        <td> <input type="text" id="txtSecondColumn" class="form-control" /></td>
+                    </tr>
+                    <tr>
+                        <td>Üçüncü Sütun Adı (Sayısal Alan)</td>
+                        <td> <input type="text" id="txtThirdColumn" class="form-control" /></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btnSetForm">Kaydet</button>
+                <button type="button" class="btn btn-secondary btnSetFormDismiss" data-dismiss="modal">İptal</button>
+            </div>
+        </div>
+    </div>
+</div>

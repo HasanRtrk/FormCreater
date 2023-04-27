@@ -1,0 +1,66 @@
+﻿@using EntityLayer.Concrete
+@model Form
+@{
+    ViewData["Title"] = "FormDetail";
+    Layout = "~/Views/Shared/HomeLayout.cshtml";
+}
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+
+<link rel="stylesheet" href="//cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
+
+<script src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script>
+    $(function () {
+        $('table').DataTable({
+            autoWidth: false,
+            stateSave: false,
+            language: {
+                search: '_INPUT_',
+                searchPlaceholder: 'Tablo içinde arama...',
+                lengthMenu: '_MENU_',
+                zeroRecords: 'Aradığınız kayıt bulunamadı.',
+                info: "Gösterilen _START_-_END_&nbsp;,&nbsp;Toplam Kayıt Sayısı: _TOTAL_",
+                infoEmpty: 'Kayıt bulunamadı',
+                "infoFiltered": "(Toplam _MAX_ kayıt filtrelenmiştir.)",
+                paginate: { 'first': 'First', 'last': 'Last', 'next': '&rarr;', 'previous': '&larr;' }
+            },
+            responsive: {
+                details: {
+                    type: 'column',
+                    target: 0
+                }
+            },
+            columnDefs: [{
+                className: 'dtr-control',
+                orderable: false,
+                targets: 0
+            }],
+            "order": [[0, 'asc']]
+        });
+    });
+</script>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Form Bilgileri</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr style="padding-top:30px">
+            <td>@Model.FirstColumn</td>
+            <td><input type="text" class="form-control" /></td>
+        </tr>
+        <tr>
+            <td>@Model.SecondColumn</td>
+            <td><input type="text" class="form-control" /></td>
+        </tr>
+        <tr>
+            <td>@Model.ThirdColumn</td>
+            <td><input type="number" class="form-control" /></td>
+        </tr>
+    </tbody>
+</table>
